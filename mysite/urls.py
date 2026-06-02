@@ -1,3 +1,4 @@
+from where_to_go import views
 """
 URL configuration for mysite project.
 
@@ -19,4 +20,5 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.index),
 ]
