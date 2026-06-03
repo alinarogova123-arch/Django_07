@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Place, Image
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from django.http.response import JsonResponse
 
 # Create your views here.
 
@@ -29,3 +32,21 @@ def index(request):
 	}
 
 	return render(request, 'index.html', context)
+
+
+def places_detail(request, place_id):
+	place = get_object_or_404(Place, id=place_id)
+	images = []
+	for image in place.images.all():
+		images.append(image.img.url)
+	response_data = {
+		'title': place.title,
+		'imgs': images,
+		'description_short': place.description_short,
+		'description_long': place.description_long,
+		'coordinates': {
+			'lat': place.lat,
+			'lng': place.lon,
+		}
+	}
+	return JsonResponse(response_data, safe=False, json_dumps_params={'ensure_ascii': False})
