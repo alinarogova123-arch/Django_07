@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Place, Image
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404
 from django.http.response import JsonResponse
+from django.urls import reverse
 
 # Create your views here.
 
@@ -17,7 +17,7 @@ def serialize_place(place):
       'properties': {
         'title': place.title,
         'placeId': place.id,
-        'detailsUrl': './static/places/moscow_legends.json'
+        'detailsUrl': reverse('places', args=[place.id])
       }
     }
 
