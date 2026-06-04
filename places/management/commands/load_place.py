@@ -1,9 +1,11 @@
-from django.core.management.base import BaseCommand
-import requests
-from places.models import Place, Image
 from io import BytesIO
 from pathlib import Path
+
+import requests
+from django.core.management.base import BaseCommand
 from django.core.files import File
+
+from places.models import Place, Image
 
 
 def add_image_to_place(image_urls, place):

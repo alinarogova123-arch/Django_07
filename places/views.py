@@ -1,10 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Place, Image
 from django.http import HttpResponse
 from django.http.response import JsonResponse
 from django.urls import reverse
 
-# Create your views here.
+from .models import Place, Image
 
 
 def serialize_place(place):
