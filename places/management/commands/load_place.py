@@ -1,5 +1,6 @@
 from io import BytesIO
 from pathlib import Path
+import time
 
 import requests
 from django.core.management.base import BaseCommand
@@ -36,10 +37,8 @@ def add_image_to_place(image_urls, place):
 class Command(BaseCommand):
     help = "Добавляет запись в модель Place"
 
-
     def add_arguments(self, parser):
         parser.add_argument("url", type=str, help="url JSON файла")
-
 
     def handle(self, *args, **options):
         url = options["url"]
