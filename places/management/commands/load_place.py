@@ -11,6 +11,7 @@ from places.models import Place, Image
 def add_image_to_place(image_urls, place):
 	for image_url in image_urls:
 		response = requests.get(image_url)
+		response.raise_for_status()
 		image = BytesIO(response.content)
 		image_file = File(image, name=Path(image_url).name)
 		img, created = Image.objects.get_or_create(
@@ -33,6 +34,7 @@ class Command(BaseCommand):
 	def handle(self, *args, **options):
 		url = options["url"]
 		response = requests.get(url)
+		response.raise_for_status()
 		serialize_place = response.json()
 		image_urls = serialize_place.get("imgs")
 		place, created = Place.objects.get_or_create(
