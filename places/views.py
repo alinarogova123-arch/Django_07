@@ -35,9 +35,7 @@ def index(request):
 
 def places_detail(request, place_id):
     place = get_object_or_404(Place, id=place_id)
-    images = []
-    for image in place.images.all():
-        images.append(image.img.url)
+    images = [image.img.url for image in place.images.all()]
     serialize_place = {
         'title': place.title,
         'imgs': images,
