@@ -33,13 +33,13 @@ class Command(BaseCommand):
 	def handle(self, *args, **options):
 		url = options["url"]
 		response = requests.get(url)
-		title = response.json().get("title")
-		image_urls = response.json().get("imgs")
+		serialize_place = response.json()
+		image_urls = serialize_place.get("imgs")
 		place, created = Place.objects.get_or_create(
-			title=response.json().get("title"),
-    		short_description=response.json().get("description_short"),
-    		long_description=response.json().get("description_long"),
-    		lat=response.json().get("coordinates").get("lat"),
-    		lon=response.json().get("coordinates").get("lng"),
+			title=serialize_place.get("title"),
+    		short_description=serialize_place.get("description_short"),
+    		long_description=serialize_place.get("description_long"),
+    		lat=serialize_place.get("coordinates").get("lat"),
+    		lon=serialize_place.get("coordinates").get("lng"),
     	)
 		add_image_to_place(image_urls, place)
