@@ -15,13 +15,11 @@ class ImageInline(SortableStackedInline):
 
     def preview_image(self, obj):
         size_attitude = obj.img.width / obj.img.height
-        return format_html('<img src="{url}" width="{width}" height={height} />'.format(
+        return format_html('<img src="{url}" width="{width}" height={height} />',
             url = obj.img.url,
             width=200 * size_attitude,
             height=200,
-            )
-    )
-
+        )
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
