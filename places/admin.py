@@ -24,3 +24,10 @@ class ImageInline(SortableStackedInline):
 @admin.register(Place)
 class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [ImageInline]
+    search_fields = ['title']
+
+
+@admin.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['place']
+
