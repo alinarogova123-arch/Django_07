@@ -12,7 +12,7 @@ def add_image_to_place(image_urls, place):
 	attempt = 0
 	for image_url in image_urls:
         try:
-            response = requests.get(image_urls)
+            response = requests.get(image_url)
             response.raise_for_status()
         except requests.exceptions.ReadTimeout:
             continue
