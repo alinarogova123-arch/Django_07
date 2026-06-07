@@ -15,9 +15,9 @@ class ImageInline(SortableStackedInline):
 
     def preview_image(self, obj):
         size_attitude = obj.img.width / obj.img.height
-        return format_html('<img src="{url}" width="{width}" height={height} />',
+        return format_html('<img src="{url}" style="max-width: {width}px; max-height: {height}px;" />',
             url = obj.img.url,
-            width=200 * size_attitude,
+            width=400,
             height=200,
         )
 
