@@ -9,7 +9,7 @@ env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = env.str('SITE_SECRET_KEY', 'REPLACE_ME')
+SECRET_KEY = env.str('SITE_SECRET_KEY')
 
 DEBUG = env.bool('DEBUG', True)
 
