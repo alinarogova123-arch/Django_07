@@ -37,8 +37,8 @@ class Command(BaseCommand):
 		image_urls = response.json().get("imgs")
 		place, created = Place.objects.get_or_create(
 			title=response.json().get("title"),
-    		description_short=response.json().get("description_short"),
-    		description_long=response.json().get("description_long"),
+    		short_description=response.json().get("description_short"),
+    		long_description=response.json().get("description_long"),
     		lat=response.json().get("coordinates").get("lat"),
     		lon=response.json().get("coordinates").get("lng"),
     	)
