@@ -9,18 +9,28 @@ from places.models import Place, Image
 
 
 def add_image_to_place(image_urls, place):
+	attempt = 0
 	for image_url in image_urls:
-		response = requests.get(image_url)
-		response.raise_for_status()
-		image = BytesIO(response.content)
-		image_file = File(image, name=Path(image_url).name)
-		img, created = Image.objects.get_or_create(
-			name=Path(image_url).name,
-			place=place,
-			defaults={
-        		'img': image_file
-    		}
-		)
+        try:
+            response = requests.get(image_urls)
+            response.raise_for_status()
+        except requests.exceptions.ReadTimeout:
+            continue
+        except requests.exceptions.ConnectionError:
+            attempt += 1
+            if attempt > 10:
+                time.sleep(20)
+        else:
+        	attempt = 0
+			image = BytesIO(response.content)
+			image_file = File(image, name=Path(image_url).name)
+			img, created = Image.objects.get_or_create(
+				name=Path(image_url).name,
+				place=place,
+				defaults={
+        			'img': image_file
+    			}
+			)
 
 
 class Command(BaseCommand):
