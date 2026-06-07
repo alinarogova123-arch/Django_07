@@ -8,13 +8,13 @@
 
 Скачайте код с GitHub. Установите зависимости:
 
-```sh
+```
 pip install -r requirements.txt
 ```
 
 Создайте базу данных SQLite
 
-```sh
+```
 python3 manage.py migrate
 ```
 
@@ -26,11 +26,15 @@ python3 manage.py runserver
 
 ## Наполнение контента
 
-Для удобства добавления новых локаций используйте команду `python manage.py load_place http://адрес/json/файла`
+Для удобства добавления новых локаций используйте команду 
+
+```
+python manage.py load_place http://адрес/json/файла
+```
 
 В качестве аргумента указать url адрес json файла с данными локации, он должен быть следующего вида:
 
-```
+```py
 {
     "title": "Антикафе Bizone",
     "imgs": [
