@@ -48,9 +48,11 @@ class Command(BaseCommand):
         image_urls = serialize_place.get("imgs")
         place, created = Place.objects.get_or_create(
             title=serialize_place.get("title"),
-            short_description=serialize_place.get("description_short"),
-            long_description=serialize_place.get("description_long"),
-            lat=serialize_place.get("coordinates").get("lat"),
-            lon=serialize_place.get("coordinates").get("lng"),
+            defaults={
+                "short_description": serialize_place.get("description_short"),
+                "long_description": serialize_place.get("description_long"),
+                "lat": serialize_place.get("coordinates").get("lat"),
+                "lon": serialize_place.get("coordinates").get("lng"),
+            }
         )
         add_image_to_place(image_urls, place)
